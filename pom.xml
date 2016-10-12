@@ -5,9 +5,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.nabu.packaging</groupId>
 	<artifactId>packaging-glue-cli</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>${be.nabu.packaging-packaging-glue-cli-version}</version>
 	<name>Glue CLI Client</name>
 	<url>http://maven.apache.org</url>
+	
+	<parent>
+		<groupId>be.nabu</groupId>
+		<artifactId>core</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -49,59 +56,44 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.7</version>
-				<extensions>true</extensions>
-			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-database</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-json</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-xml</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-transcoder</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-types</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-integrator</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.libs.resources</groupId>
 			<artifactId>resources-file</artifactId>
-			<version>1.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>be.nabu.libs.resources</groupId>
 			<artifactId>resources-classpath</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
