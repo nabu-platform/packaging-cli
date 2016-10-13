@@ -8,7 +8,7 @@
 	<version>${be.nabu.packaging-packaging-glue-cli-version}</version>
 	<name>Glue CLI Client</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<parent>
 		<groupId>be.nabu</groupId>
 		<artifactId>core</artifactId>
@@ -94,6 +94,10 @@
 		<dependency>
 			<groupId>be.nabu.libs.resources</groupId>
 			<artifactId>resources-classpath</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
 		</dependency>
 	</dependencies>
 </project>
