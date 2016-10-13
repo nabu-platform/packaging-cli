@@ -48,7 +48,7 @@
 						</goals>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>glue-cli</finalName>
+							<finalName>cli-${project.version}</finalName>
 							<descriptors>
 								<descriptor>src/main/assembly/nabu-glue-cli-assembly.xml</descriptor>
 							</descriptors>
