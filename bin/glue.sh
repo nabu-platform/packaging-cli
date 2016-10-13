@@ -1,1 +1,1 @@
-java -Ddevelopment=true -cp "lib/*:." be.nabu.glue.Main "$@"
+java -Ddevelopment=true -Dversion=2 -cp "lib/*:." be.nabu.glue.Main "$@"
