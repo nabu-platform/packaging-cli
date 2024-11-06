@@ -1,20 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.nabu.packaging</groupId>
 	<artifactId>packaging-cli</artifactId>
-	<version>${be.nabu.packaging-packaging-cli-version}</version>
+	<version>1.4-SNAPSHOT</version>
 	<name>Glue CLI Client</name>
 	<url>http://maven.apache.org</url>
-
 	<parent>
 		<groupId>be.nabu</groupId>
 		<artifactId>core</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -103,8 +98,6 @@
 			<groupId>be.nabu.glue</groupId>
 			<artifactId>glue-excel</artifactId>
 		</dependency>
-		
-		<!-- java 11+ -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -124,12 +117,11 @@
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
-		</dependency> 
+		</dependency>
 		<dependency>
-		    <groupId>javax.jws</groupId>
-		    <artifactId>javax.jws-api</artifactId>
-		    <version>1.1</version>
+			<groupId>javax.jws</groupId>
+			<artifactId>javax.jws-api</artifactId>
+			<version>1.1</version>
 		</dependency>
 	</dependencies>
 </project>
-
