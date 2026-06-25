@@ -1,4 +1,4 @@
-name: Release core artifact
+name: Release application
 
 on:
   push:
@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  release:
+  build-zip:
     runs-on: ubuntu-latest
     steps:
       - name: Check out sources
@@ -124,7 +124,8 @@ jobs:
           fi
           echo "value=$release_version" >> "$GITHUB_OUTPUT"
 
-      - name: Set artifact version
+      - name: Set application version
+        shell: bash
         run: mvn -s "$HOME/.m2/settings.xml" -B versions:set -DnewVersion=${{ steps.version.outputs.value }} -DgenerateBackupPoms=false
 
       - name: Prepare signing keystore
@@ -135,7 +136,8 @@ jobs:
         env:
           SIGN_KEYSTORE_BASE64: ${{ secrets.SIGN_KEYSTORE_BASE64 }}
 
-      - name: Build artifact
+      - name: Build application zip
+        shell: bash
         run: >-
           mvn -s "$HOME/.m2/settings.xml" -B -Duser.timezone=UTC clean package
           -Dsign.keystore=$RUNNER_TEMP/github-ci-signing.jks
@@ -144,22 +146,37 @@ jobs:
           -Dsign.storepass=${{ secrets.SIGN_KEYSTORE_PASSWORD }}
           -Dsign.keypass=${{ secrets.SIGN_KEY_PASSWORD }}
 
-      - name: Collect release asset
-        id: asset
+      - name: Collect zip asset
         shell: bash
         run: |
           set -euo pipefail
-          artifact_id=$(sed -n 's:.*<artifactId>\(.*\)</artifactId>.*:\1:p' pom.xml | head -n 1)
           version='${{ steps.version.outputs.value }}'
-          asset="target/${artifact_id}-${version}.jar"
-          if [ ! -f "$asset" ]; then
-            echo "Expected built artifact not found: $asset"
+          zip_asset="target/cli-${version}.zip"
+          if [ ! -f "$zip_asset" ]; then
+            echo "Expected built artifact not found: $zip_asset"
             exit 1
           fi
-          echo "path=$asset" >> "$GITHUB_OUTPUT"
+          cp "$zip_asset" "$RUNNER_TEMP/packaging-cli-${version}.zip"
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: packaging-cli-zip
+          path: ${{ runner.temp }}/packaging-cli-${{ steps.version.outputs.value }}.zip
+
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - build-zip
+    steps:
+      - name: Download zip artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: packaging-cli-zip
+          path: artifacts/zip
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ steps.asset.outputs.path }}
+          files: artifacts/zip/*
           generate_release_notes: true
